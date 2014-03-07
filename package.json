@@ -1,0 +1,34 @@
+{
+  "name": "deqorator",
+  "version": "0.1.0",
+  "description": "A queued decorator for Node.js to easily decorate objects using middleware.",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jvandemo/deqorator.git"
+  },
+  "keywords": [
+    "queue",
+    "decorator",
+    "node",
+    "queued",
+    "decorate",
+    "middleware",
+    "deqorate",
+    "deqorator"
+  ],
+  "author": "Jurgen Van de Moere",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jvandemo/deqorator/issues"
+  },
+  "homepage": "https://github.com/jvandemo/deqorator",
+  "devDependencies": {
+    "chai": "~1.9.0",
+    "sinon": "~1.9.0",
+    "sinon-chai": "~2.5.0"
+  }
+}
