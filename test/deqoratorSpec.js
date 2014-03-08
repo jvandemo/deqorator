@@ -43,7 +43,6 @@ describe('Deqorator', function(){
             deqorator.use(middleware1);
             deqorator.use(middleware2);
             deqorator.decorate(item, function(err, item){
-                console.log('Complete: ' + item);
                 done();
             });
         });
