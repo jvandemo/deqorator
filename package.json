@@ -1,7 +1,7 @@
 {
   "name": "deqorator",
   "version": "0.1.0",
-  "description": "A queued decorator for Node.js to easily decorate objects using middleware.",
+  "description": "A very lightweight queued decorator for Node.js to easily decorate objects using middleware.",
   "main": "index.js",
   "scripts": {
     "test": "mocha test"

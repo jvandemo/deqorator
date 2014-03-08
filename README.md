@@ -1,7 +1,7 @@
 Deqorator
 =========
 
-A queued decorator for Node.js to easily decorate objects using middleware.
+A very lightweight queued decorator for Node.js to easily decorate objects using middleware.
 
 ## What is deqorator used for?
 
