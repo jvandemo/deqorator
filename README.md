@@ -19,66 +19,72 @@ var deqorator = new Deqorator();
 
 Then add as many middleware handlers as you like:
 
+```javascript
+deqorator.use(function(err, item, next){
 
-    deqorator.use(function(err, item, next){
-
-        // The item to decorate is passed from middleware to middleware
-        // and you can make changes to it
-        item.middleware1 = "done";
-        next();
-    });
+    // The item to decorate is passed from middleware to middleware
+    // and you can make changes to it
+    item.middleware1 = "done";
+    next();
+});
+```
 
 Asynchronous callbacks are supported, just call `next()` when finished:
 
-    deqorator.use(function(err, item, next){
+```javascript
+deqorator.use(function(err, item, next){
 
-        // Some asynchronous call
-        setTimeout(function(){
-            next();
-        }, 1000);
-    });
+    // Some asynchronous call
+    setTimeout(function(){
+        next();
+    }, 1000);
+});
+```
 
 If you want to raise an error, just call `next()` with an error and all subsequent middleware handlers are skipped:
 
-    deqorator.use(function(err, item, next){
+```javascript
+deqorator.use(function(err, item, next){
 
-        // This will skip all middleware handlers after this one
-        next('Halt immediately!')
-    });
+    // This will skip all middleware handlers after this one
+    next('Halt immediately!')
+});
+```
 
 Each middleware handler is passed the item and is processed in the order you add it to the `deqorator`:
 
-    deqorator.use(function(err, item, next){
+```javascript
+deqorator.use(function(err, item, next){
 
-        // The changes from the previous middleware handler are available here
-        console.log(item.middleware1); // done
-        next();
-    });
+    // The changes from the previous middleware handler are available here
+    console.log(item.middleware1); // done
+    next();
+});
+```
 
 Once you have defined all the middleware for the deqorator, you can use it to decorate as many objects as you like.
 
 The callback of the `decorate()` function is called when the object has been completely decorated or when an error was raised:
 
-    var item = {};
+```javascript
+var item = {};
 
-    deqorator.decorate(item, function(err, item){
+deqorator.decorate(item, function(err, item){
 
-        // Error handler
-        if(err){
+    // Error handler
+    if(err){
 
-            // The partially decorated item is available in case of an error
-            console.log(item);
-
-            console.log('Oops, something went wrong while decorating the object');
-            return;
-        }
-
-        // The completely decorated item is available here if all went well
+        // The partially decorated item is available in case of an error
         console.log(item);
-    });
 
+        console.log('Oops, something went wrong while decorating the object');
+        return;
+    }
 
-
+    // The completely decorated item is available here if all went well
+    console.log(item);
+});
+```
 
 ## Method of operation
 
@@ -89,21 +95,23 @@ There is no need to worry about asynchronous behavior:
 
 So a scenario like this:
 
-    var item1 = {},
-        item2 = {},
-        item3 = {},
-        deqorator = new Deqorator(),
-        middleware1 = function(err, item, next){ ... },
-        middleware2 = function(err, item, next){ ... },
-        middleware3 = function(err, item, next){ ... };
+```javascript
+var item1 = {},
+    item2 = {},
+    item3 = {},
+    deqorator = new Deqorator(),
+    middleware1 = function(err, item, next){ ... },
+    middleware2 = function(err, item, next){ ... },
+    middleware3 = function(err, item, next){ ... };
 
-    deqorator.use(middleware1);
-    deqorator.use(middleware2);
-    deqorator.use(middleware3);
+deqorator.use(middleware1);
+deqorator.use(middleware2);
+deqorator.use(middleware3);
 
-    deqorator.decorate(item1, function(err, item){ ... });
-    deqorator.decorate(item2, function(err, item){ ... });
-    deqorator.decorate(item3, function(err, item){ ... });
+deqorator.decorate(item1, function(err, item){ ... });
+deqorator.decorate(item2, function(err, item){ ... });
+deqorator.decorate(item3, function(err, item){ ... });
+```
 
 will be processed like this:
 
