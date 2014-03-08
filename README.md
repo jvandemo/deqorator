@@ -1,9 +1,9 @@
-[![Build Status](https://travis-ci.org/jvandemo/deqorator.png?branch=master)](https://travis-ci.org/jvandemo/deqorator)
-
 Deqorator
 =========
 
 A very lightweight queued decorator for Node.js to easily decorate objects using middleware.
+
+[![Build Status](https://travis-ci.org/jvandemo/deqorator.png?branch=master)](https://travis-ci.org/jvandemo/deqorator)
 
 ## What is deqorator used for?
 
