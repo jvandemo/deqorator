@@ -128,6 +128,12 @@ will be processed like this:
 
 ## Change log
 
+### v0.2.0
+
+- Added error handling
+- Updated documentation
+- Added additional unit tests
+
 ### v0.1.0
 
 - Initial version
