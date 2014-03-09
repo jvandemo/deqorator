@@ -5,18 +5,25 @@ A very lightweight queued decorator for Node.js to easily decorate objects using
 
 [![Build Status](https://travis-ci.org/jvandemo/deqorator.png?branch=master)](https://travis-ci.org/jvandemo/deqorator)
 
+To make you feel immediately familiar with the API, the syntax is based on the Express.js middleware syntax.
+
 ## What is deqorator used for?
 
 Suppose you have an object and you want to decorate it with data (e.g. fill properties with data from several database queries).
 
-Instead of nesting all kinds of callbacks, deqorator allows you to easily create a reusable decorator using one or more middleware handlers.
+Instead of nesting all kinds of callbacks, deqorator allows you to easily create a reusable decorator using one or more layers of middleware.
+
+Middleware layers are processed in the order you define them, so you can easily depend on data you added in a previous layer.
+
+All without worrying about asynchronous callbacks.
 
 ## Quick demo
 
 First create a decorator:
 
 ```javascript
-var deqorator = new Deqorator();
+var Deqorator = require('deqorator');
+    deqorator = new Deqorator();
 ```
 
 Then add as many middleware handlers as you like:
