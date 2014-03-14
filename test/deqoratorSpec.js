@@ -32,11 +32,11 @@ describe('Deqorator', function(){
 
         it('should execute middleware in the correct order', function (done) {
             var item = {};
-            var middleware1 = function(err, item, next){
+            var middleware1 = function(item, next){
                 item.hello = 'world';
                 next();
             };
-            var middleware2 = function(err, item, next){
+            var middleware2 = function(item, next){
                 expect(item.hello).to.equal('world');
                 next();
             };
@@ -50,11 +50,11 @@ describe('Deqorator', function(){
 
         it('pass the item correctly in the chain of middleware handlers', function (done) {
             var original = {};
-            var middleware1 = function(err, item, next){
+            var middleware1 = function(item, next){
                 expect(item).to.equal(original);
                 next();
             };
-            var middleware2 = function(err, item, next){
+            var middleware2 = function(item, next){
                 expect(item).to.equal(original);
                 next();
             };
@@ -68,11 +68,11 @@ describe('Deqorator', function(){
         it('provide a partially decorated item if an error is raised', function (done) {
             this.timeout(500);
             var item = {};
-            var middleware1 = function(err, item, next){
+            var middleware1 = function(item, next){
                 item.one = 'done';
                 next();
             };
-            var middleware2 = function(err, item, next){
+            var middleware2 = function(item, next){
                 next('some error');
             };
             deqorator.use(middleware1);
@@ -87,11 +87,11 @@ describe('Deqorator', function(){
         it('skip remaining middleware layers if an error is raised', function (done) {
             this.timeout(500);
             var item = {};
-            var middleware1 = function(err, item, next){
+            var middleware1 = function(item, next){
                 item.one = 'done';
                 next('some error');
             };
-            var middleware2 = function(err, item, next){
+            var middleware2 = function(item, next){
                 item.two = 'done';
                 next();
             };

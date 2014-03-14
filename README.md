@@ -29,7 +29,7 @@ var Deqorator = require('deqorator');
 Then add as many middleware handlers as you like:
 
 ```javascript
-deqorator.use(function(err, item, next){
+deqorator.use(function(item, next){
 
     // The item to decorate is passed from middleware to middleware
     // and you can make changes to it
@@ -41,7 +41,7 @@ deqorator.use(function(err, item, next){
 Asynchronous callbacks are supported, just call `next()` when finished:
 
 ```javascript
-deqorator.use(function(err, item, next){
+deqorator.use(function(item, next){
 
     // Some asynchronous call
     setTimeout(function(){
@@ -53,7 +53,7 @@ deqorator.use(function(err, item, next){
 If you want to raise an error, just call `next()` with an error and all subsequent middleware handlers are skipped:
 
 ```javascript
-deqorator.use(function(err, item, next){
+deqorator.use(function(item, next){
 
     // This will skip all middleware handlers after this one
     next('Halt immediately!')
@@ -63,7 +63,7 @@ deqorator.use(function(err, item, next){
 Each middleware handler is passed the item and is processed in the order you add it to the `deqorator`:
 
 ```javascript
-deqorator.use(function(err, item, next){
+deqorator.use(function(item, next){
 
     // The changes from the previous middleware handler are available here
     console.log(item.middleware1); // done
@@ -109,9 +109,9 @@ var item1 = {},
     item2 = {},
     item3 = {},
     deqorator = new Deqorator(),
-    middleware1 = function(err, item, next){ ... },
-    middleware2 = function(err, item, next){ ... },
-    middleware3 = function(err, item, next){ ... };
+    middleware1 = function(item, next){ ... },
+    middleware2 = function(item, next){ ... },
+    middleware3 = function(item, next){ ... };
 
 deqorator.use(middleware1);
 deqorator.use(middleware2);
@@ -144,6 +144,10 @@ will be processed like this:
     5. if an error occurs in one of the middleware handlers and a `decorate` callback is defined, it is immediately called with `(err, item3)` and subsequent middleware handlers are skipped
 
 ## Change log
+
+### v0.3.0
+
+- Removed error handling from middleware
 
 ### v0.2.0
 
