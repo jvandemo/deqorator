@@ -22,14 +22,14 @@ All without worrying about asynchronous callbacks.
 First create a decorator:
 
 ```javascript
-var Deqorator = require('deqorator');
-    deqorator = new Deqorator();
+var deqorator = require('deqorator');
+    decorator = deqorator.createDecorator();
 ```
 
 Then add as many middleware handlers as you like:
 
 ```javascript
-deqorator.use(function(item, next){
+decorator.use(function(item, next){
 
     // The item to decorate is passed from middleware to middleware
     // and you can make changes to it
@@ -41,7 +41,7 @@ deqorator.use(function(item, next){
 Asynchronous callbacks are supported, just call `next()` when finished:
 
 ```javascript
-deqorator.use(function(item, next){
+decorator.use(function(item, next){
 
     // Some asynchronous call
     setTimeout(function(){
@@ -53,17 +53,17 @@ deqorator.use(function(item, next){
 If you want to raise an error, just call `next()` with an error and all subsequent middleware handlers are skipped:
 
 ```javascript
-deqorator.use(function(item, next){
+decorator.use(function(item, next){
 
     // This will skip all middleware handlers after this one
     next('Halt immediately!')
 });
 ```
 
-Each middleware handler is passed the item and is processed in the order you add it to the `deqorator`:
+Each middleware handler is passed the item and is processed in the order you add it to the `decorator`:
 
 ```javascript
-deqorator.use(function(item, next){
+decorator.use(function(item, next){
 
     // The changes from the previous middleware handler are available here
     console.log(item.middleware1); // done
@@ -71,14 +71,14 @@ deqorator.use(function(item, next){
 });
 ```
 
-Once you have defined all the middleware for the deqorator, you can use it to decorate as many objects as you like.
+Once you have defined all the middleware for the decorator, you can use it to decorate as many objects as you like.
 
 The callback of the `decorate()` function is called when the object has been completely decorated or when an error was raised:
 
 ```javascript
 var item = {};
 
-deqorator.decorate(item, function(err, item){
+decorator.decorate(item, function(err, item){
 
     // Error handler
     if(err){
@@ -108,18 +108,18 @@ So a scenario like this:
 var item1 = {},
     item2 = {},
     item3 = {},
-    deqorator = new Deqorator(),
+    decorator = new Deqorator(),
     middleware1 = function(item, next){ ... },
     middleware2 = function(item, next){ ... },
     middleware3 = function(item, next){ ... };
 
-deqorator.use(middleware1);
-deqorator.use(middleware2);
-deqorator.use(middleware3);
+decorator.use(middleware1);
+decorator.use(middleware2);
+decorator.use(middleware3);
 
-deqorator.decorate(item1, function(err, item){ ... });
-deqorator.decorate(item2, function(err, item){ ... });
-deqorator.decorate(item3, function(err, item){ ... });
+decorator.decorate(item1, function(err, item){ ... });
+decorator.decorate(item2, function(err, item){ ... });
+decorator.decorate(item3, function(err, item){ ... });
 ```
 
 will be processed like this:
@@ -144,6 +144,11 @@ will be processed like this:
     5. if an error occurs in one of the middleware handlers and a `decorate` callback is defined, it is immediately called with `(err, item3)` and subsequent middleware handlers are skipped
 
 ## Change log
+
+### v1.0.0
+
+- Added factory function to create new decorators
+- Updated API for user convenience
 
 ### v0.3.0
 
