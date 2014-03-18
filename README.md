@@ -9,6 +9,8 @@ To make you feel immediately familiar with the API, the syntax is based on the E
 
 [Watch the tutorial video for a quick demo](http://vimeo.com/89389165).
 
+[![Video tutorial](http://i.imgur.com/rJBDhnr.png)](http://vimeo.com/89389165)
+
 ## What is deqorator used for?
 
 Suppose you have an object and you want to decorate it with data (e.g. fill properties with data from several database queries).
