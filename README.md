@@ -7,6 +7,8 @@ A very lightweight queued decorator for Node.js to easily decorate objects using
 
 To make you feel immediately familiar with the API, the syntax is based on the Express.js middleware syntax.
 
+[Watch the tutorial video for a quick demo](http://vimeo.com/89389165).
+
 ## What is deqorator used for?
 
 Suppose you have an object and you want to decorate it with data (e.g. fill properties with data from several database queries).
